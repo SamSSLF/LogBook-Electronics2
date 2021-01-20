@@ -1,2 +1,2 @@
 # LogBook Electronics2
- Log book for electronics labs DESE50002
+Record of learnning for DESE50002 electronics labs 
