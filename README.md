@@ -1,4 +1,4 @@
-# LogBook Electronics2
+# Electronics 2 Log Book
 *Record of learnning for DESE50002 electronics labs* 
 
 **CID:01704560**
