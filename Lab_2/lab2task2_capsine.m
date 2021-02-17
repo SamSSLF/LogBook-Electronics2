@@ -16,8 +16,8 @@ pb.sine();
 
 % Capture N samples
 N = 1000;
-samples = pb.get_block(N);
-data = samples - mean(samples);
+samples = pb.get_block(N);     % get a block of N samples
+data = samples - mean(samples); % remove the DC offset
 
 % plot data
 figure(1);

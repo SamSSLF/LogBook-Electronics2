@@ -1,7 +1,8 @@
 function signal = combine_signals(s1,s2);
-% function taes two periodic signals s1 and s2, 
+% function taes two signals s1 and s2, 
 % adds them together into a composite signal, 
-% then plots it
+% then plots the composite signal
+% with the original signals dotted in the background
     signal = s1 + s2;
     plot(s1(1:100),"LineStyle","-.");
     hold on;
