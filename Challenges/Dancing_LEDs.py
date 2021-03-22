@@ -10,10 +10,12 @@ micropython.alloc_emergency_exception_buf(100)
 
 # I2C connected to Y9, Y10 (I2C bus 2) and Y11 is reset low active
 oled = OLED_938(pinout={'sda': 'Y10', 'scl': 'Y9', 'res': 'Y8'}, height=64,
-                   external_vcc=False, i2c_devid=60)
+				   external_vcc=False, i2c_devid=60)
 oled.poweron()
 oled.init_display()
-oled.draw_text(0,0, 'Beat Detection')
+oled.draw_text(0, 0, "Samantha Foong")
+oled.draw_text(0,20,"Challenge 1")	
+oled.draw_text(0,30,"Dancing LEDs")
 oled.display()
 
 # define ports for microphone, LEDs and trigger out (X5)
@@ -21,6 +23,9 @@ mic = ADC(Pin('Y11'))
 MIC_OFFSET = 1523		# ADC reading of microphone for silence
 dac = pyb.DAC(1, bits=12)  # Output voltage on X5 (BNC) for debugging
 b_LED = LED(4)		# flash for beats on blue LED
+r_LED = LED(1)
+g_LED = LED(2)
+y_LED = LED(3)
 
 N = 160				# size of sample buffer s_buf[]
 s_buf = array('H', 0 for i in range(N))  # reserve buffer memory
@@ -36,7 +41,18 @@ def r_flash():
 		r_LED.on()
 		pyb.delay(30)
 		r_LED.off()
-	
+
+def g_flash():
+		g_LED.on()
+		pyb.delay(40)
+		g_LED.off()
+
+def y_flash():
+		y_LED.on()
+		pyb.delay(25)
+		y_LED.off()
+
+
 def energy(buf):	# Compute energy of signal in buffer
 	sum = 0
 	for i in range(len(buf)):
@@ -97,7 +113,11 @@ while True:				# Main program loop
 			if (c>BEAT_THRESHOLD):		# look for a beat
 				b_flash()					# beat found, flash blue LED
 				tic = pyb.millis()		# reset tic
-			else if (c<BEAT_THRESHOLD and c>SILENCE_THRESHOLD):
+			elif (c<1.5 and c>SILENCE_THRESHOLD):
 				r_flash()
+			elif (c<1.8 and c>1.5):
+				g_flash()
+			elif (c<2 and c>1.8):
+				y_flash() 
 		dac.write(0)					# sueful to see on scope, can remove
 		buffer_full = False				# reset status flag

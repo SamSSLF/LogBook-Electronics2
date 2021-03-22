@@ -79,7 +79,31 @@ def B_back(value):
 def B_stop():
 	B1.high()
 	B2.high()
-	
+
+def danceMoves(filename):
+	'''
+	Reads a text file, splits it into characters, puts the characters into a list
+	'''
+	file = open(filename,'r')
+	moves = file.read().split()		# splits text into characters at the whitespace
+	return moves		#returns a list of characters e.g. ['F', 'B', 'F', 'B']
+
+def nowDance():
+	moves = danceMoves('dance_moves.txt')
+	for move in moves:
+		if move == 'F':
+			A_forward(100)
+			B_forward(100)
+		elif move == 'B':
+			A_back(100)
+			B_back(100)
+		elif move == 'L':
+			A_forward(100)
+			B_forward(50)
+		elif move == 'R':
+			A_forward(50)
+			B_forward(100)
+
 # Initialise variables
 DEADZONE = 5
 speed = 0

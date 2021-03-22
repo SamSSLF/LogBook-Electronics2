@@ -83,7 +83,7 @@ def isr_motorA(dummy):	# motor sensor ISR - just count transitions
 def isr_motorB(dummy):	# motor sensor ISR - just count transitions
 	global B_count
 	B_count += 1
-		
+
 def isr_speed_timer(dummy): 	# timer interrupt at 100msec intervals
 	global A_count
 	global A_speed

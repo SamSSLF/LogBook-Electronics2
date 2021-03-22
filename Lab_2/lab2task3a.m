@@ -29,5 +29,5 @@ while true
     data = samples - mean(samples);
     figure(2)
     clf;
-    plot_spec(data,fs);
+    plot_spec(samples,fs);
 end
